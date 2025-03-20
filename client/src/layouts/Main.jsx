@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import SideNavBar from "../components/SideNavBar";
-import Notification from "../components/Notification";
 import BottomNavBar from "../components/BottomNavBar";
+import Notifications from "../components/Notifications";
 
 const Main = () => {
   return (
@@ -10,9 +10,9 @@ const Main = () => {
       <section className="hidden md:flex">
         <SideNavBar />
         <Outlet />
-        <Notification />
+        <Notifications />
       </section>
-      <section className="md:hidden">
+      <section className="md:hidden bg-midnight text-white">
         <Outlet />
         <BottomNavBar />
       </section>
