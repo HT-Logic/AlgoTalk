@@ -7,6 +7,8 @@ from rest_framework import exceptions
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+from .permissions import IsOwnerOrReadOnly
+
 from . import serializers
 
 # Create your views here.
@@ -29,9 +31,7 @@ class UserRegisterAPIView(APIView):
         serializer.save()
         return Response(serializer.data)
     
-class UserInfoAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-    
-    def get(self, request):
-        user = request.user
-        return Response(user)
+class UserDetailAPIView(generics.RetrieveDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = serializers.UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
