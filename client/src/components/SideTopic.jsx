@@ -9,7 +9,7 @@ const SideTopic = () => {
       </div>
       <div>
         <h1 className="text-xl mb-2">React</h1>
-        <p className="text-sm line-clamp-2">
+        <p className="text-sm line-clamp-2 text-neutral-400">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis veniam
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis veniam
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis veniam

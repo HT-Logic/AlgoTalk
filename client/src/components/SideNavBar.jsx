@@ -4,7 +4,7 @@ import SideTopic from "./SideTopic";
 
 const SideNavBar = () => {
   return (
-    <section className="bg-night w-[25%] h-screen text-white overflow-hidden">
+    <section className="bg-night w-[25%] h-screen text-white overflow-hidden fixed">
       <div className="flex">
         {/* dr ka humbager  */}
         <div className="pt-5 w-52 bg-primary flex justify-center">
