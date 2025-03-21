@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -19,9 +20,9 @@ const Hero = () => {
             <div className="underline underline-offset-4">
               Join the Room Today!{" "}
             </div>
-            <button className="cursor-crosshair border-2 border-primary rounded-full font-semibold px-4 py-2 hover:bg-primary hover:text-white transition-colors duration-150">
+            <Link className="cursor-crosshair border-2 border-primary rounded-full font-semibold px-4 py-2 hover:bg-primary hover:text-white transition-colors duration-150">
               Sign Up Now
-            </button>
+            </Link>
           </div>
         </div>
         <div className="w-1/2 p-20">
