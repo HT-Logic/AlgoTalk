@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, filters
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.response import Response
@@ -40,7 +40,7 @@ class RoomJoinAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-    
+
 class RoomLeaveAPIView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     
@@ -64,5 +64,11 @@ class RoomListMemberAPIView(APIView):
         
         serializer = RoomMemberJoinedSerializer(roomMembers, many=True)
         return Response(serializer.data)
+    
+class RoomSearchAPIView(generics.ListAPIView):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title']
     
         
