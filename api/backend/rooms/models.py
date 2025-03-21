@@ -10,6 +10,7 @@ class Room(models.Model):
     title = models.CharField(max_length=300)
     description = models.TextField(null=True, blank=True)
     host = models.ForeignKey(User, on_delete=models.CASCADE)
+    members_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

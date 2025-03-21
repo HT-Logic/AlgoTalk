@@ -6,7 +6,7 @@ from users.serializers import UserSerializer
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = ['id', 'title', 'description', 'host', 'created_at']
+        fields = ['id', 'title', 'description', 'host', 'members_count', 'created_at']
         
 class RoomMemberSerializer(serializers.ModelSerializer):
     class Meta:
