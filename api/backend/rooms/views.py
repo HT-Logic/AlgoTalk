@@ -1,10 +1,10 @@
-from rest_framework import generics, filters
+from rest_framework import generics, filters, status
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.response import Response
 
-from .models import Room, RoomMember
-from .serializers import RoomSerializer, RoomMemberSerializer, RoomMemberJoinedSerializer
+from .models import Room, RoomMember, Message
+from .serializers import RoomSerializer, RoomCreateSerializer, RoomMemberSerializer, RoomMemberJoinedSerializer, MessageSerializer, MessageSendSerializer
 from .permissions import IsOwnerOrReadOnly
 
 from users.serializers import UserSerializer
@@ -12,9 +12,14 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # Create your views here.
-class RoomListCreateAPIView(generics.ListCreateAPIView):
+class RoomListAPIView(generics.ListAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+class RoomCreateAPIView(generics.CreateAPIView):
+    queryset = Room.objects.all()
+    serializer_class = RoomCreateSerializer
     permission_classes = [permissions.IsAuthenticated]
     
 class RoomDetailAPIView(generics.RetrieveDestroyAPIView):
@@ -66,9 +71,38 @@ class RoomListMemberAPIView(APIView):
         return Response(serializer.data)
     
 class RoomSearchAPIView(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['title']
     
+class MessageListAPIView(generics.ListAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_queryset(self):
+        room_id = self.kwargs['room_id']
+        return Message.objects.filter(room=room_id)
+    
+class MessageSendAPIView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def post(self, request, room_id):
+        try:
+            room = Room.objects.get(id=room_id)
+        except Room.DoesNotExist:
+            return Response({ "error": "Room doesn't exist you idiot" })
+        
+        data = {
+            "sender": request.user.id,
+            "room": room.id,
+            "content": request.data['content']
+        }
+        
+        serializer = MessageSendSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
         

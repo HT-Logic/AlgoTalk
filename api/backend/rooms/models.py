@@ -42,3 +42,13 @@ class RoomMember(models.Model):
     
     class Meta:
         unique_together = ('user', 'room')
+        
+class Message(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['timestamp']
