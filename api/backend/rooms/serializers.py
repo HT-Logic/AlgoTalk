@@ -1,3 +1,6 @@
+import django
+django.setup()
+
 from rest_framework import serializers
 
 from .models import Room, RoomMember, Message
@@ -22,14 +25,21 @@ class RoomMemberSerializer(serializers.ModelSerializer):
         
 class RoomMemberJoinedSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+    room = RoomSerializer()
     
     class Meta:
         model = RoomMember
         fields = ['id', 'user', 'room', 'joined_at']
         
+class RoomJoinedSerializer(serializers.ModelSerializer):
+    room = RoomSerializer(read_only=True)
+    
+    class Meta:
+        model = RoomMember
+        fields = ['room']
+        
 class MessageSerializer(serializers.ModelSerializer):
     sender = UserSerializer(read_only=True)
-    room = RoomSerializer(read_only=True)
     
     class Meta:
         model = Message

@@ -1,10 +1,13 @@
+import django
+django.setup()
+
 from rest_framework import generics, filters, status
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.response import Response
 
 from .models import Room, RoomMember, Message
-from .serializers import RoomSerializer, RoomCreateSerializer, RoomMemberSerializer, RoomMemberJoinedSerializer, MessageSerializer, MessageSendSerializer
+from .serializers import *
 from .permissions import IsOwnerOrReadOnly
 
 from users.serializers import UserSerializer
@@ -17,10 +20,23 @@ class RoomListAPIView(generics.ListAPIView):
     serializer_class = RoomSerializer
     permission_classes = [permissions.IsAuthenticated]
     
-class RoomCreateAPIView(generics.CreateAPIView):
-    queryset = Room.objects.all()
-    serializer_class = RoomCreateSerializer
+class RoomCreateAPIView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    
+    def post(self, request):
+        data = {
+            "title": request.data['title'],
+            "description": request.data['description'],
+            "host": request.user.id
+        }
+        
+        serializer = RoomCreateSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        
+        room = serializer.save()
+        RoomMember.objects.create(user=self.request.user, room=room)
+        
+        return Response(serializer.data)
     
 class RoomDetailAPIView(generics.RetrieveDestroyAPIView):
     queryset = Room.objects.all()
@@ -43,7 +59,7 @@ class RoomJoinAPIView(APIView):
         
         serializer = RoomMemberSerializer(data=data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        serializer.save()    
         return Response(serializer.data)
 
 class RoomLeaveAPIView(APIView):
@@ -105,4 +121,18 @@ class MessageSendAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+    
+class JoinedRoomsAPIView(APIView):
+    permissions_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        try:
+            rooms = RoomMember.objects.filter(user=request.user)
+        except RoomMember.DoesNotExist:
+            return Response({ 'message': "You've joined no rooms mf" })
+        
+        serializer = RoomJoinedSerializer(rooms, many=True)
+        return Response(serializer.data)
+        
+        
         

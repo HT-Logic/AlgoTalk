@@ -1,3 +1,6 @@
+import django
+django.setup()
+
 from rest_framework import serializers
 
 from django.contrib.auth import get_user_model
@@ -10,8 +13,16 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email', 'password', 'display_name', 'profile_image']
         
-    # def validate_password(self, value)
+    def validate_password(self, value):
+        if len(value) < 8:
+            raise serializers.ValidationError("Password must be at least 8 characters long.")
+        if not any(char.isdigit() for char in value):
+            raise serializers.ValidationError("Password must contain at least one number.")
+        if not any(char.isalpha() for char in value):
+            raise serializers.ValidationError("Password must contain at least one letter.")
         
+        return value
+    
     def create(self, validated_data):
         user = User.objects.create_user(
             username=validated_data['username'],
