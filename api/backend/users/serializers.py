@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'display_name', 'profile_image']
+        fields = ['id', 'username', 'email', 'password', 'display_name']
         
     def validate_password(self, value):
         if len(value) < 8:
@@ -29,6 +29,5 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             password=validated_data['password'],
             display_name=validated_data.get('display_name'),
-            profile_image=validated_data.get('profile_image')
         )
         return user

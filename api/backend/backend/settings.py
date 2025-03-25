@@ -78,11 +78,13 @@ TEMPLATES = [
 ASGI_APPLICATION = 'backend.asgi.application'
 
 CHANNEL_LAYERS = {
-    'default': {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": ["redis://default:vhGwoywnFUiOOuSyAMtpGPJWjJYWvJhP@nozomi.proxy.rlwy.net:21651"]
+        },
+    },
 }
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -91,9 +93,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'algotalk',
-        'USER': 'root',
-        'PASSWORD': 'kali'
-    }
+        'USER': '2aLpxxPtuKT5b8y.root',
+        'PASSWORD': 'ubD69dScQqinYCjO',
+        'HOST': 'gateway01.us-west-2.prod.aws.tidbcloud.com',
+        'PORT': 4000,
+        'OPTIONS': {
+            'ssl': {
+                'ca': '/backend/certs/ca.pem',
+                'autocommit': True,  # Helps with performance
+                'charset': 'utf8mb4',
+            }
+        },
+        'CONN_MAX_AGE': 600,
+    },
 }
 
 # Password validation

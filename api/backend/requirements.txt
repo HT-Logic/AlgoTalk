@@ -1,5 +1,5 @@
 django
 djangorestframework
 djangorestframework-simplejwt
-channels
+channels[daphne]
 channels-redis
