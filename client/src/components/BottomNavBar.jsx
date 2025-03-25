@@ -1,6 +1,6 @@
 import { Eye, MessageSquareMore, Settings2 } from "lucide-react";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const BottomNavBar = () => {
   return (
@@ -8,10 +8,10 @@ const BottomNavBar = () => {
       <NavLink to={"/home/explore"}>
         <Eye />
       </NavLink>
-      <NavLink to={"/home"}>
+      <Link to={"/home"}>
         <MessageSquareMore />
-      </NavLink>
-      <NavLink to={"/setting"}>
+      </Link>
+      <NavLink to={"/home/setting"}>
         <Settings2 />
       </NavLink>
     </section>

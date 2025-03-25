@@ -5,6 +5,7 @@ import Explore from "./pages/Explore";
 import LandingPage from "./pages/LandingPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Setting from "./pages/Setting";
 
 const router = createBrowserRouter([
   {
@@ -24,12 +25,30 @@ const router = createBrowserRouter([
     element: <Main />,
     children: [
       {
+        path: "pc",
+        element: <MainPage />,
+        children: [
+          {
+            index: true,
+            element: <Explore />,
+          },
+          {
+            path: "setting",
+            element: <Setting />,
+          },
+        ],
+      },
+      {
         index: true,
         element: <MainPage />,
       },
       {
         path: "explore",
         element: <Explore />,
+      },
+      {
+        path: "setting",
+        element: <Setting />,
       },
     ],
   },

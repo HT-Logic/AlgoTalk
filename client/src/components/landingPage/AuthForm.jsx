@@ -10,7 +10,7 @@ const AuthForm = ({ button }) => {
       <Form>
         <div className="my-4">
           <label htmlFor="username" className="block">
-            Username
+            Username <span className="text-primary">*</span>
           </label>
           <input
             type="text"
@@ -21,7 +21,9 @@ const AuthForm = ({ button }) => {
         </div>
         {button === "Sign Up" && (
           <div className="my-4">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">
+              Email <span className="text-primary">*</span>
+            </label>
             <input
               type="text"
               name="email"
@@ -32,7 +34,9 @@ const AuthForm = ({ button }) => {
         )}
 
         <div className="my-4">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">
+            Password <span className="text-primary">*</span>
+          </label>
           <input
             type="text"
             name="password"
@@ -42,7 +46,9 @@ const AuthForm = ({ button }) => {
         </div>
 
         <div className="w-full flex flex-col justify-center items-center gap-4 mt-8">
-          <button className="w-full bg-primary rounded p-2">{button}</button>
+          <button className="w-full bg-primary rounded p-2 cursor-pointer">
+            {button}
+          </button>
 
           {button === "Sign In" ? (
             <Link to={"/sign-up"} className="text-primary">
