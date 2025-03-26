@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AccountForm from "../components/AccountForm";
 
 const Setting = () => {
   const [fileName, setFileName] = useState("No file selected");
@@ -36,6 +37,7 @@ const Setting = () => {
           </div>
         </div>
       </div>
+      <AccountForm />
     </section>
   );
 };
