@@ -59,6 +59,7 @@ const AccountForm = () => {
       <button
         type="submit"
         onClick={() => setIsChangingPsw(false)}
+<<<<<<< HEAD
         className="bg-primary text-midnight px-4 py-2 rounded"
       >
         Done
@@ -71,6 +72,12 @@ const AccountForm = () => {
           Cancel
         </button>
       )}
+=======
+        className="bg-primary text-midnight block px-4 py-2 rounded"
+      >
+        Done
+      </button>
+>>>>>>> 4eaef27458ec8f2ce124ec14ef7badc730213467
     </Form>
   );
 };
