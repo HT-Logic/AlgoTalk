@@ -4,7 +4,7 @@ const NotificationMessage = () => {
   return (
     <section className="flex justify-center items-center gap-4 py-4">
       <img
-        src="../src/assets/Hurricane.jpg"
+        src="/Hurricane.jpg"
         alt=""
         className="h-16 object-cover rounded-full"
       />

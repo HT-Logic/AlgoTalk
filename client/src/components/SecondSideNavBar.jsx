@@ -10,7 +10,7 @@ const SecondSideNavBar = ({ isOpen, handleClose }) => {
       <div className="bg-primary w-[15%] p-10">
         <div>
           <img
-            src="../src/assets/Hurricane.jpg"
+            src="/Hurricane.jpg"
             alt="pfp"
             className="w-20 h-20 rounded-full"
           />

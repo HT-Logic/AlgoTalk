@@ -12,7 +12,7 @@ const Setting = () => {
       <div className="mb-10 text-2xl md:text-4xl font-semibold">Setting</div>
       <div className="flex text-xl gap-8">
         <img
-          src="../src/assets/Hurricane.jpg"
+          src="/Hurricane.jpg"
           alt="pfp"
           className="w-32 h-32 rounded-full"
         />
