@@ -3,6 +3,16 @@ import { Form } from "react-router-dom";
 
 const AccountForm = () => {
   const [isChangingPsw, setIsChangingPsw] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "htet aung lwin",
+    email: "qqwer@12.com",
+    newpsw: "",
+    oldpsw: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <Form className="bg-night py-4 md:py-8 px-4 mt-8 rounded-xl">
@@ -11,8 +21,9 @@ const AccountForm = () => {
         <input
           type="text"
           name="username"
-          id="username"
-          value={"htet aung lwin"}
+          id="username-input"
+          value={formData.username}
+          onChange={handleChange}
           className="border-2 border-neutral-300 w-full rounded p-2 focus:outline-2 focus:border-0 focus:outline-primary"
         />
       </div>
@@ -21,13 +32,15 @@ const AccountForm = () => {
         <input
           type="text"
           name="email"
-          id="email"
-          value={"qqwer@12.com"}
+          id="email-input"
+          value={formData.email}
+          onChange={handleChange}
           className="border-2 border-neutral-300 w-full rounded p-2 focus:outline-2 focus:border-0 focus:outline-primary"
         />
       </div>
       {!isChangingPsw && (
         <button
+          type="button"
           className="text-danger mb-8 cursor-pointer block"
           onClick={() => setIsChangingPsw(true)}
         >
@@ -41,16 +54,20 @@ const AccountForm = () => {
             <input
               type="password"
               name="newpsw"
-              id="newpsw"
+              id="newpsw-input"
+              value={formData.newpsw}
+              onChange={handleChange}
               className="border-2 border-neutral-300 w-full rounded p-2 focus:outline-2 focus:border-0 focus:outline-primary"
             />
           </div>
           <div className="mb-8">
-            <label htmlFor="email">Old Password</label>
+            <label htmlFor="oldpsw">Old Password</label>
             <input
               type="password"
               name="oldpsw"
-              id="oldpsw"
+              id="oldpsw-input"
+              value={formData.oldpsw}
+              onChange={handleChange}
               className="border-2 border-neutral-300 w-full rounded p-2 focus:outline-2 focus:border-0 focus:outline-primary"
             />
           </div>
@@ -58,13 +75,13 @@ const AccountForm = () => {
       )}
       <button
         type="submit"
-        onClick={() => setIsChangingPsw(false)}
         className="bg-primary text-midnight px-4 py-2 rounded"
       >
         Done
       </button>
       {isChangingPsw && (
         <button
+          type="button"
           className="text-danger px-4 py-2 rounded"
           onClick={() => setIsChangingPsw(false)}
         >
