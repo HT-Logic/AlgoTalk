@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Setting from "./pages/Setting";
+import ChatRoom from "./components/ChatRoom";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
           {
             path: "setting",
             element: <Setting />,
+          },
+          {
+            path: "room/:id",
+            element: <ChatRoom />,
           },
         ],
       },

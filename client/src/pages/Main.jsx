@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 const Main = () => {
   return (
     <>
-      <section className="hidden md:block ml-[25%] bg-midnight w-[55%] min-h-screen text-white">
+      <section className="hidden md:block ml-[25%] bg-midnight w-[60%] min-h-screen text-white">
         <Outlet />
       </section>
 

@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NotificationMessage = () => {
   return (
-    <section className="flex justify-center items-center gap-4 py-4">
+    <Link className="flex justify-center items-center gap-4 py-4 hover:bg-midnight px-6 ">
       <img
         src="/Hurricane.jpg"
         alt=""
@@ -10,11 +11,11 @@ const NotificationMessage = () => {
       />
       <div>
         <p>
-          <span className="font-semibold">Hurricane</span> mention you in the
-          React Topic!
+          <span className="font-semibold text-sm">Hurricane</span> mention you
+          in the React Topic!
         </p>
       </div>
-    </section>
+    </Link>
   );
 };
 
